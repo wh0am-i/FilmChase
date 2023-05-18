@@ -2,8 +2,34 @@ import Image from "next/image";
 import Link from "next/link";
 import Input from "../components/input";
 import PriButton from "../components/PrimaryButton";
+// import { useAuth } from "../context/AuthUserContext";
 
 export default function Cadastro() {
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [name, setName] = useState("");
+
+//   const router = useRouter();
+//   const [error, setError] = useState(null);
+
+//   const { createUserWithEmailAndPassword } = useAuth();
+
+//   const onSubmit = (event) => {
+//     setError(null);
+
+//     if (passwordOne === passwordTwo)
+//       createUserWithEmailAndPassword(email, passwordOne)
+//         .then((authUser) => {
+//           console.log("Success. The user is created in Firebase");
+//           router.push("/logged_in");
+//         })
+//         .catch((error) => {
+//           setError(error.message);
+//         });
+//     else setError("Password do not match");
+//     event.preventDefault();
+//   };
+
   return (
     <main className="flex min-h-screen flex-col bg-movie">
       <div className="mt-10 ml-10 xs:ml-20">
@@ -29,7 +55,14 @@ export default function Cadastro() {
             </span>
             <div className=" mt-10">
               <Input placeholder="Nome" />
-              <Input placeholder="Email" />
+              <Input
+                // type="email"
+                // value={email}
+                // onChange={(event) => setEmail(event.target.value)}
+                // name="email"
+                // id="signUpEmail"
+                placeholder="Email"
+              />
               <Input placeholder="Senha" />
             </div>
             <PriButton>Cadastrar</PriButton>
