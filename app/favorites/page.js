@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import FilmCard from "../../components/FilmCard.js";
 
-export default function Homepage() {
+export default function Favorites() {
   const [films, setFilms] = useState([
     {
       name: "As aventuras de TinTin",
@@ -23,13 +23,13 @@ export default function Homepage() {
           <div className="text-[#A1A1A1] mt-14 border-b border-[#1F1F1F] py-4">
             <p className="text-xl">Ínicio</p>
             <div className="mt-2 flex flex-col gap-2">
-              <Link href="/homepage" className="bg-white flex items-center p-3 w-60 rounded-md gap-2 cursor-pointer">
-                <img src="search.svg"></img>
-                <p className="text-[#AC1A19] font-bold">Buscar</p>
+              <Link href="/homepage" className="flex gap-2 p-3 rounded-md cursor-pointer hover:bg-slate-800 transition-all">
+                <img src="searchDisabled.svg"></img>
+                <p className="font-bold">Buscar</p>
               </Link>
-              <Link href="/favorites" className="flex gap-2 p-3 rounded-md cursor-pointer hover:bg-slate-800 transition-all">
+              <Link href="/favorites" className="bg-white flex items-center p-3 w-60 rounded-md gap-2 cursor-pointer">
                 <img src="heart.svg"></img>
-                <p className="font-bold">Curtidos</p>
+                <p className="text-[#AC1A19] font-bold">Curtidos</p>
               </Link>
               <Link href="/userList" className="flex gap-2 p-3 rounded-md cursor-pointer hover:bg-slate-800 transition-all">
                 <img src="personList.svg"></img>
