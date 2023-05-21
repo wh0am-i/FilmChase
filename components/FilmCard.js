@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { Favorite, Visibility, List, Star } from "@material-ui/icons";
 
 export default function FilmCard(props) {
   const [value, setValue] = useState("");
@@ -17,12 +18,12 @@ export default function FilmCard(props) {
             </div>
           </div>
           <div className="flex gap-3 w-full h-12 mt-8 items-center justify-center">
-            <img className="w-6" src="personList.svg"></img>
-            <img className="w-10" src="heart.svg"></img>
-            <img className="w-6" src="eye.svg"></img>
+            <List className="text-[#A1A1A1]"></List>
+            <Favorite className="text-[#A1A1A1]"></Favorite>
+            <Visibility className="text-[#A1A1A1]"></Visibility>
           </div>
           <div className="flex mt-2 w-full gap-2 items-center justify-center">
-            <img className="w-4" src="star.svg"></img>
+            <Star className="text-[#FFC700]"></Star>
             <span className="text-lg text-[#FFC700]">{props.rate}</span>
           </div>
         </div>
