@@ -7,6 +7,7 @@ import Filter from "@/components/Filter.js";
 import { Search, AccountCircle, FilterList } from "@material-ui/icons";
 import PrimaryButton from "@/components/PrimaryButton.js";
 import Modal from "@/components/Modal";
+import Loading from "@/components/Loading.js";
 
 export default function Homepage() {
   const [openFilters, setOpenFilters] = useState(false);
@@ -97,15 +98,18 @@ export default function Homepage() {
             </div>
           </div>
           {loading ? (
-            <p className="text-[#A1A1A1] text-2xl text-center w-full mt-10">
-              Carregando...
-            </p>
+            <div className="flex flex-col w-full h-full items-center justify-center gap-2">
+              <p className="text-[#A1A1A1] text-2xl">Carregando...</p>
+              <Loading></Loading>
+            </div>
           ) : (
             <div className="flex w-full h-full mt-4 overflow-y-auto flex-col">
               {films.length == 0 ? (
-                <p className="text-[#A1A1A1] text-2xl text-center w-full mt-10">
-                  Nenhum filme encontrado
-                </p>
+                <div className="flex flex-col w-full h-full items-center justify-center gap-2">
+                  <p className="text-[#A1A1A1] text-2xl text-center w-full mt-10">
+                    Nenhum filme encontrado
+                  </p>
+                </div>
               ) : (
                 <div className="flex gap-3 flex-wrap">
                   {films.map((film) => {

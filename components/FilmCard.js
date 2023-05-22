@@ -29,7 +29,7 @@ export default function FilmCard(props) {
             <List className="text-[#A1A1A1]" />
             <Favorite className="text-[#A1A1A1]" />
             <Visibility
-              className="text-[#A1A1A1]"
+              className="text-[#A1A1A1] cursor-pointer hover:text-white active:scale-90 transition-all"
               onClick={handleVisibilityClick}
             />
           </div>
