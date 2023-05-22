@@ -1,34 +1,41 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import Input from "../components/input";
 import PriButton from "../components/PrimaryButton";
-// import { useAuth } from "../context/AuthUserContext";
+import { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../auth/firebase";
+import { db } from "../auth/firebase.js";
+import { collection, addDoc } from "firebase/firestore";
 
 export default function Cadastro() {
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-//   const [name, setName] = useState("");
 
-//   const router = useRouter();
-//   const [error, setError] = useState(null);
+  const cadastrar = () => {
+    const password = document.getElementById("password").value;
+    const email = document.getElementById("email").value;
+    const name = document.getElementById("name").value;
 
-//   const { createUserWithEmailAndPassword } = useAuth();
-
-//   const onSubmit = (event) => {
-//     setError(null);
-
-//     if (passwordOne === passwordTwo)
-//       createUserWithEmailAndPassword(email, passwordOne)
-//         .then((authUser) => {
-//           console.log("Success. The user is created in Firebase");
-//           router.push("/logged_in");
-//         })
-//         .catch((error) => {
-//           setError(error.message);
-//         });
-//     else setError("Password do not match");
-//     event.preventDefault();
-//   };
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(async (userCredential) => {
+        const user = userCredential.user;
+        const docRef = await addDoc(
+          collection(db, "users"),
+          {
+            email: email,
+            name: name,
+            uid: user.uid,
+          }
+        );
+        window.location.pathname = "/login";
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+  };
 
   return (
     <main className="flex min-h-screen flex-col bg-movie">
@@ -54,18 +61,16 @@ export default function Cadastro() {
               <Link href="/login"> Entre</Link>
             </span>
             <div className=" mt-10">
-              <Input placeholder="Nome" />
+              <Input placeholder="Nome" id="name" />
+              <Input type="email" id="email" name="email" placeholder="Email" />
               <Input
-                // type="email"
-                // value={email}
-                // onChange={(event) => setEmail(event.target.value)}
-                // name="email"
-                // id="signUpEmail"
-                placeholder="Email"
+                type={"password"}
+                id="password"
+                name="password"
+                placeholder="Senha"
               />
-              <Input placeholder="Senha" />
             </div>
-            <PriButton>Cadastrar</PriButton>
+            <PriButton onClick={cadastrar}>Cadastrar</PriButton>
           </div>
         </div>
       </div>

@@ -1,9 +1,28 @@
+'use client';
+
 import Image from "next/image";
 import Link from "next/link";
 import Input from "../../components/input";
 import PriButton from "../../components/PrimaryButton.js";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../auth/firebase";
 
 export default function Login() {
+
+  function entrar() {
+    const password = document.getElementById("password").value;
+    const email = document.getElementById("email").value;
+
+  signInWithEmailAndPassword(auth, email, password)
+  .then(async (userCredential) => {
+    window.location.pathname = "/homepage";
+  })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    })
+  };
+
   return (
     <main className="flex min-h-screen flex-col bg-movie">
       <div className="mt-10 ml-10 xs:ml-20">
@@ -28,10 +47,15 @@ export default function Login() {
               <Link href="/"> Cadastre</Link>
             </span>
             <div className=" mt-10">
-              <Input placeholder="Email" />
-              <Input placeholder="Senha" />
+            <Input type="email" id="email" name="email" placeholder="Email" />
+              <Input
+                type={"password"}
+                id="password"
+                name="password"
+                placeholder="Senha"
+              />
             </div>
-            <PriButton>Entrar</PriButton>
+            <PriButton onClick={entrar}>Entrar</PriButton>
           </div>
         </div>
       </div>
