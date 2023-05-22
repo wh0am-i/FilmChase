@@ -9,9 +9,9 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../auth/firebase";
 import { db } from "../auth/firebase.js";
 import { collection, addDoc } from "firebase/firestore";
+import { toast, ToastContainer } from "react-nextjs-toast";
 
 export default function Cadastro() {
-
   const cadastrar = () => {
     const password = document.getElementById("password").value;
     const email = document.getElementById("email").value;
@@ -20,20 +20,37 @@ export default function Cadastro() {
     createUserWithEmailAndPassword(auth, email, password)
       .then(async (userCredential) => {
         const user = userCredential.user;
-        const docRef = await addDoc(
-          collection(db, "users"),
-          {
-            email: email,
-            name: name,
-            uid: user.uid,
-          }
-        );
+        toast.notify("Conta criada!", {
+          duration: 5,
+          type: "success",
+        });
+        const docRef = await addDoc(collection(db, "users"), {
+          email: email,
+          name: name,
+          uid: user.uid,
+        });
         window.location.pathname = "/login";
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
+        if (password.length < 8) {
+          toast.notify("A senha deve ter no mínimo 8 caracteres", {
+            duration: 5,
+            type: "error",
+          });
+        } else if (
+          { error }.error.message ==
+          "Firebase: Error (auth/email-already-in-use)."
+        ) {
+          toast.notify("Esse email ja foi cadastrado.", {
+            duration: 5,
+            type: "error",
+          });
+        } else {
+          toast.notify("Sua conta não foi criada, tente novamente.", {
+            duration: 5,
+            type: "error",
+          });
+        }
       });
   };
 
@@ -70,6 +87,7 @@ export default function Cadastro() {
                 placeholder="Senha"
               />
             </div>
+            <ToastContainer />
             <PriButton onClick={cadastrar}>Cadastrar</PriButton>
           </div>
         </div>
