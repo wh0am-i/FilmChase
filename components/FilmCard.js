@@ -1,9 +1,10 @@
-"use client";
 import React, { useState } from "react";
 import { Favorite, Visibility, List, Star } from "@material-ui/icons";
 
 export default function FilmCard(props) {
-  const [value, setValue] = useState("");
+  const handleVisibilityClick = () => {
+    props.onVisibilityClick();
+  };
   return (
     <main className="font-mont">
       <div className="bg-[#1C1C1C] w-56 h-72 rounded-2xl">
@@ -12,12 +13,12 @@ export default function FilmCard(props) {
             <img
               className="h-40 rounded-t-2xl w-full object-cover"
               src={"https://image.tmdb.org/t/p/w500/" + props.image}
-            ></img>
+            />
           ) : (
             <img
               className="h-40 rounded-t-2xl w-full object-cover"
               src="noPhoto.png"
-            ></img>
+            />
           )}
           <div className="absolute top-36 w-full items-center flex justify-center">
             <div className="w-fit px-3 bg-[#161616] h-10 rounded-md flex items-center">
@@ -25,12 +26,15 @@ export default function FilmCard(props) {
             </div>
           </div>
           <div className="flex gap-3 w-full h-12 mt-8 items-center justify-center">
-            <List className="text-[#A1A1A1]"></List>
-            <Favorite className="text-[#A1A1A1]"></Favorite>
-            <Visibility className="text-[#A1A1A1]"></Visibility>
+            <List className="text-[#A1A1A1]" />
+            <Favorite className="text-[#A1A1A1]" />
+            <Visibility
+              className="text-[#A1A1A1]"
+              onClick={handleVisibilityClick}
+            />
           </div>
           <div className="flex mt-2 w-full gap-2 items-center justify-center">
-            <Star className="text-[#FFC700]"></Star>
+            <Star className="text-[#FFC700]" />
             <span className="text-lg text-[#FFC700]">{props.rate}</span>
           </div>
         </div>
