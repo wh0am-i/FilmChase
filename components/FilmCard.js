@@ -8,13 +8,20 @@ export default function FilmCard(props) {
     <main className="font-mont">
       <div className="bg-[#1C1C1C] w-56 h-72 rounded-2xl">
         <div className="relative flex flex-col">
-          <img
-            className="h-40 rounded-t-2xl w-full object-cover"
-            src={"https://image.tmdb.org/t/p/w500/"+props.image}
-          ></img>
+          {props.image ? (
+            <img
+              className="h-40 rounded-t-2xl w-full object-cover"
+              src={"https://image.tmdb.org/t/p/w500/" + props.image}
+            ></img>
+          ) : (
+            <img
+              className="h-40 rounded-t-2xl w-full object-cover"
+              src="noPhoto.png"
+            ></img>
+          )}
           <div className="absolute top-36 w-full items-center flex justify-center">
             <div className="w-fit px-3 bg-[#161616] h-10 rounded-md flex items-center">
-              <span className="text-white">{props.title}</span>
+              <span className="text-center text-white">{props.title}</span>
             </div>
           </div>
           <div className="flex gap-3 w-full h-12 mt-8 items-center justify-center">

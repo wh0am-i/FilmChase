@@ -1,33 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import FilmCard from "../../components/FilmCard.js";
 import LateralMenu from "../../components/LateralMenu.js";
 import Filter from "@/components/Filter.js";
 import { Search, AccountCircle, FilterList } from "@material-ui/icons";
-import PrimaryButton from "@/components/PrimaryButton.js";
 
 export default function UserList() {
   const [openFilters, setOpenFilters] = useState(false);
-  const [page, setPage] = useState(1);
-  const [films, setFilms] = useState([]);
-  useEffect(() => {
-    fetch(`https://api.themoviedb.org/3/list/${page}?language=en-US`, {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNzUxM2VhMDAxZDUyMTNkYjExMWQ4OTI5M2E0YjIyNCIsInN1YiI6IjY0NWNmZDFlMWI3MGFlMDBmZDZkNWUwNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.MZUoMEgF3X1GkXtbYo8Y4kxSyQuNYBlL6f28bUM23Rk",
-      },
-    })
-      .then((response) => response.json())
-      .then((response) =>
-        films.length == 0
-          ? setFilms(response.items)
-          : setFilms([...films, ...response.items])
-      )
-      .catch((err) => console.error(err));
-  }, [page]);
+  const [films, setFilms] = useState([
+    {
+      name: "As aventuras de TinTin",
+      rate: 8.0,
+      image:
+        "https://images.justwatch.com/poster/254317172/s718/as-aventuras-de-tintim.%7Bformat%7D",
+    },
+  ]);
   return (
     <main className="font-mont w-screen h-screen bg-[#161616] flex">
       <LateralMenu userList={true}></LateralMenu>
@@ -53,7 +41,7 @@ export default function UserList() {
             <AccountCircle className="text-[#A1A1A1]"></AccountCircle>
           </div>
         </div>
-        <div className="flex w-full h-full mt-4 overflow-y-auto flex-col">
+        <div className="flex w-full h-full mt-4">
           {films.length == 0 ? (
             <p className="text-[#A1A1A1] text-2xl text-center w-full self-center">
               Nenhum filme encontrado
@@ -63,20 +51,14 @@ export default function UserList() {
               {films.map((film) => {
                 return (
                   <FilmCard
-                    title={film.title}
-                    image={film.poster_path}
-                    rate={film.vote_average}
+                    name={film.name}
+                    image={film.image}
+                    rate={film.rate}
                   ></FilmCard>
                 );
               })}
             </div>
           )}
-          <div
-            onClick={() => setPage(page + 1)}
-            className="w-full flex items-center justify-center"
-          >
-            <PrimaryButton>Ver mais</PrimaryButton>
-          </div>
         </div>
       </div>
     </main>
