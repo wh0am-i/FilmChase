@@ -62,7 +62,7 @@ export default function Cadastro() {
           <span className="text-[#AC1A19] font-bold">Chase</span>
         </div>
 
-        <div className="mt-10">
+        <div className="mt-20">
           <div className=" font-mont font-bold">
             <span className="text-white sm:text-4xl text-2xl">
               Crie uma conta nova
