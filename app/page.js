@@ -24,6 +24,8 @@ export default function Cadastro() {
           duration: 5,
           type: "success",
         });
+
+        // aqui 
         const docRef = await addDoc(collection(db, "users"), {
           email: email,
           name: name,
@@ -31,6 +33,8 @@ export default function Cadastro() {
         });
         window.location.pathname = "/login";
       })
+      // ate aqui
+
       .catch((error) => {
         if (password.length < 8) {
           toast.notify("A senha deve ter no mínimo 8 caracteres", {

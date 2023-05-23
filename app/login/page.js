@@ -15,6 +15,7 @@ export default function Login() {
 
     signInWithEmailAndPassword(auth, email, password)
       .then(async (userCredential) => {
+        localStorage.setItem('uid', auth.currentUser.uid)
         toast.notify("Você está sendo logado...", {
           duration: 5,
           type: "success",

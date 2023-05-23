@@ -122,6 +122,9 @@ export default function Homepage() {
                           setOpenFilmDetails(true);
                           setSelectedFilm(film);
                         }}
+                        onLikeClick={() => {
+                          console.log("Filme: ", film.title);
+                        }}
                       ></FilmCard>
                     );
                   })}
