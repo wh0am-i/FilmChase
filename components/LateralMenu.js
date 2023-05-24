@@ -5,7 +5,7 @@ import { Explore, Favorite, List, ExitToApp } from "@material-ui/icons";
 
 export default function LateralMenu(props) {
   return (
-    <div className="border-r border-[#1F1F1F] h-screen w-96 flex">
+    <div className="max-2xl:hidden border-r border-[#1F1F1F] h-screen w-96 flex">
       <div className="ml-8">
         <div className="text-2xl mt-14">
           <span className="text-white font-light">Film</span>
