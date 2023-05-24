@@ -17,7 +17,7 @@ const cadastrar = async () => {
     const name = document.getElementById("name").value;
     let password = document.getElementById("password").value; // Texto temp para ser enviado pro webserver
 
-    if (password.length >= 8){
+    if (password.length >= 8){/*
         const response = await fetch('https://wh0am1.pythonanywhere.com/gerar-hash', {
           method: 'POST',
           headers: {
@@ -31,7 +31,7 @@ const cadastrar = async () => {
         } else {
           console.error('Erro ao enviar texto:', response.status);
         }
-      };
+      };*/
       createUserWithEmailAndPassword(auth, email, password)
       .then(async (userCredential) => {
         const user = userCredential.user;
