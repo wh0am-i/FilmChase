@@ -13,7 +13,7 @@ export default function Login() {
     const email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
 
-    const response = await fetch('http://wh0am1.pythonanywhere.com/gerar-hash', {
+    const response = await fetch('https://wh0am1.pythonanywhere.com/gerar-hash', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
