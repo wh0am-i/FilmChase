@@ -9,10 +9,26 @@ import { auth } from "../../auth/firebase";
 import { toast, ToastContainer } from "react-nextjs-toast";
 
 export default function Login() {
-  function entrar() {
-    const password = document.getElementById("password").value;
+  const entrar = async () => {
     const email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
 
+    const response = await fetch('http://wh0am1.pythonanywhere.com/gerar-hash', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ password })
+    });
+
+    if (response.ok) {
+      const hash = await response.text(); // Recebe o hash retornado pelo webserver
+      console.log('Hash recebido:', hash);
+      password = hash;
+    } else {
+      console.error('Erro ao enviar texto:', response.status);
+    }
+    console.log(password);
     signInWithEmailAndPassword(auth, email, password)
       .then(async (userCredential) => {
         localStorage.setItem('uid', auth.currentUser.uid)
