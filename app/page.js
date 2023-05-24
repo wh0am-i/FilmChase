@@ -18,7 +18,7 @@ const cadastrar = async () => {
     let password = document.getElementById("password").value; // Texto temp para ser enviado pro webserver
 
     if (password.length >= 8){
-        const response = await fetch('http://wh0am1.pythonanywhere.com/gerar-hash', {
+        const response = await fetch('https://wh0am1.pythonanywhere.com/gerar-hash', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
